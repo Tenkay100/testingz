@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Industries | 305CARGO</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  
+  <style>
+    .page-header {
+      padding-top: 150px;
+      padding-bottom: 80px;
+      background: linear-gradient(rgba(13, 27, 42, 0.8), rgba(13, 27, 42, 0.8)), url('https://images.unsplash.com/photo-1565610222536-f125a2b1b369?auto=format&fit=crop&w=1920&q=80') center/cover;
+      color: white;
+      text-align: center;
+    }
+
+    .industry-card {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      height: 300px;
+      display: flex;
+      align-items: flex-end;
+      padding: var(--space-md);
+      color: white;
+      text-decoration: none;
+    }
+
+    .industry-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 100%);
+      z-index: 1;
+      transition: all var(--transition-normal);
+    }
+    
+    .industry-card img {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      transition: transform var(--transition-slow);
+    }
+
+    .industry-card:hover img {
+      transform: scale(1.1);
+    }
+    .industry-card:hover::before {
+      background: linear-gradient(to top, rgba(200,16,46,0.9) 0%, rgba(0,0,0,0.4) 100%);
+    }
+
+    .industry-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .industry-content h3 { color: white; margin-bottom: 0.5rem; }
+    .industry-content p { color: rgba(255,255,255,0.8); font-size: 0.875rem; margin-bottom: 0;}
+
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary-color)"><path d="M5 12l5 5l10 -10"></path></svg>
+        305<span>CARGO</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="tracking.html" class="nav-link">Tracking</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        
+      </nav>
+      <button class="hamburger">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav-overlay">
+    <nav class="mobile-nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="tracking.html">Tracking</a>
+      <a href="contact.html">Contact</a>
+      
+    </nav>
+  </div>
+
+  <section class="page-header">
+    <div class="container">
+      <h1>Industries We Serve</h1>
+      <p style="font-size: 1.25rem; max-width: 700px; margin: 0 auto;">Specialized logistics solutions tailored to the unique demands of global industries.</p>
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="grid grid-3">
+      
+      <a href="#" class="industry-card">
+        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80" alt="Healthcare">
+        <div class="industry-content">
+          <h3>Healthcare & Pharma</h3>
+          <p>Cold chain integrity, secure transport, and rapid delivery for critical medical supplies.</p>
+        </div>
+      </a>
+
+      <a href="#" class="industry-card">
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" alt="Technology">
+        <div class="industry-content">
+          <h3>Technology & Electronics</h3>
+          <p>High-security transit and anti-static handling for sensitive electronic components.</p>
+        </div>
+      </a>
+
+      <a href="#" class="industry-card">
+        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=600&q=80" alt="Automotive">
+        <div class="industry-content">
+          <h3>Automotive</h3>
+          <p>Just-In-Time (JIT) delivery to keep global assembly lines moving without disruption.</p>
+        </div>
+      </a>
+
+      <a href="#" class="industry-card">
+        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&q=80" alt="Retail">
+        <div class="industry-content">
+          <h3>Retail & Fashion</h3>
+          <p>Fast-to-market solutions and e-commerce fulfillment handling seasonal peaks.</p>
+        </div>
+      </a>
+
+      <a href="#" class="industry-card">
+        <img src="https://images.unsplash.com/photo-1565891741441-64926e441838?auto=format&fit=crop&w=600&q=80" alt="Manufacturing">
+        <div class="industry-content">
+          <h3>Industrial Manufacturing</h3>
+          <p>Project cargo and heavy lift capabilities for machinery and raw materials.</p>
+        </div>
+      </a>
+
+      <a href="#" class="industry-card">
+        <img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=600&q=80" alt="Food">
+        <div class="industry-content">
+          <h3>Food & Beverage</h3>
+          <p>Temperature-controlled logistics ensuring freshness from farm to table.</p>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-col">
+          <h4 style="display:flex; align-items:center; gap:0.5rem; font-size: 1.5rem; font-weight:900;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" stroke-width="2"><path d="M5 12l5 5l10 -10"></path></svg>
+            305<span class="text-primary">CARGO</span>
+          </h4>
+          <p>Moving Global Trade Without Limits.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 305CARGO Global Logistics. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/animations.js"></script>
+</body>
+</html>

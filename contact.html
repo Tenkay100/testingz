@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | 305CARGO</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  
+  <style>
+    .page-header {
+      padding-top: 150px;
+      padding-bottom: 80px;
+      background: linear-gradient(rgba(13, 27, 42, 0.9), rgba(13, 27, 42, 0.9)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80') center/cover;
+      color: white;
+      text-align: center;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+    }
+    
+    @media (max-width: 992px) {
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+
+    .contact-info-card {
+      background: var(--light-gray);
+      padding: var(--space-md);
+      border-radius: var(--radius-md);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    
+    .contact-icon {
+      color: var(--primary-color);
+      flex-shrink: 0;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary-color)"><path d="M5 12l5 5l10 -10"></path></svg>
+        305<span>CARGO</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="tracking.html" class="nav-link">Tracking</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        
+      </nav>
+      <button class="hamburger">&#9776;</button>
+    </div>
+  </header>
+
+  <section class="page-header">
+    <div class="container">
+      <h1>Contact Our Team</h1>
+      <p style="font-size: 1.25rem; max-width: 700px; margin: 0 auto;">Get in touch with our global logistics experts available 24/7.</p>
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="contact-grid">
+      
+      <div class="">
+        <h2 style="margin-bottom: 2rem;">Get In Touch</h2>
+        
+        <div class="contact-info-card">
+          <div class="contact-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          </div>
+          <div>
+            <h4 style="margin-bottom: 0.25rem;">Global Headquarters</h4>
+            <p style="margin-bottom: 0;">1000 Logistics Blvd, Suite 305<br>Miami, FL 33122, USA</p>
+          </div>
+        </div>
+
+        <div class="contact-info-card">
+          <div class="contact-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          </div>
+          <div>
+            <h4 style="margin-bottom: 0.25rem;">Phone Support (24/7)</h4>
+            <p style="margin-bottom: 0;">+1 (800) 305-CARGO<br>+1 (305) 555-0199</p>
+          </div>
+        </div>
+
+        <div class="contact-info-card">
+          <div class="contact-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          </div>
+          <div>
+            <h4 style="margin-bottom: 0.25rem;">Email Inquiry</h4>
+            <p style="margin-bottom: 0;">sales@305cargo.com<br>support@305cargo.com</p>
+          </div>
+        </div>
+      </div>
+
+      <div >
+        <form style="background: white; padding: var(--space-md); border-radius: var(--radius-md); box-shadow: var(--shadow-md); border: 1px solid var(--border-color);">
+          <h3 style="margin-bottom: 1.5rem;">Send a Message</h3>
+          
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-input" required>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-input" required>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Subject</label>
+            <select class="form-input">
+              <option>General Inquiry</option>
+              <option>Sales & Quotes</option>
+              <option>Support & Tracking</option>
+              <option>Careers</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Message</label>
+            <textarea class="form-input" rows="4" required></textarea>
+          </div>
+          
+          <button type="button" class="btn btn-primary" style="width: 100%;">Send Message</button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-col">
+          <h4 style="display:flex; align-items:center; gap:0.5rem; font-size: 1.5rem; font-weight:900;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" stroke-width="2"><path d="M5 12l5 5l10 -10"></path></svg>
+            305<span class="text-primary">CARGO</span>
+          </h4>
+          <p>Moving Global Trade Without Limits.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 305CARGO Global Logistics. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/animations.js"></script>
+</body>
+</html>

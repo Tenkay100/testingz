@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bill of Lading - 305CARGO</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; background: #f0f2f5; margin: 0; padding: 2rem; color: #111; }
+    .document { background: white; max-width: 800px; margin: 0 auto; padding: 3rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 2px solid #1A1A1A; }
+    .header { text-align: center; border-bottom: 3px double #1A1A1A; padding-bottom: 1.5rem; margin-bottom: 2rem; }
+    .logo { font-size: 2.5rem; font-weight: 900; color: #1A1A1A; }
+    .logo span { color: #FF6B00; }
+    .header h1 { margin: 0.5rem 0 0; font-size: 1.25rem; text-transform: uppercase; letter-spacing: 2px; color: #4A5568; }
+    
+    .tracking-barcode { text-align: center; margin-bottom: 2rem; font-family: 'Libre Barcode 39', monospace; font-size: 3rem; color: #1A1A1A; }
+    .tracking-text { font-family: monospace; font-size: 1.25rem; text-align: center; margin-top: -0.5rem; margin-bottom: 2rem; font-weight:bold; }
+    
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid #1A1A1A; border-left: 1px solid #1A1A1A; }
+    .cell { border-right: 1px solid #1A1A1A; border-bottom: 1px solid #1A1A1A; padding: 1rem; }
+    .cell h3 { margin: 0 0 0.5rem 0; font-size: 0.75rem; text-transform: uppercase; color: #718096; }
+    .cell p { margin: 0; font-size: 0.875rem; font-weight: 600; }
+    
+    table { width: 100%; border-collapse: collapse; margin-top: 2rem; border: 1px solid #1A1A1A; }
+    th, td { border: 1px solid #1A1A1A; padding: 0.75rem; text-align: left; font-size: 0.875rem; }
+    th { background: #F7FAFC; color: #4A5568; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; }
+    
+    .signatures { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 4rem; }
+    .sig-line { border-top: 1px solid #1A1A1A; padding-top: 0.5rem; font-size: 0.75rem; text-align: center; }
+    
+    .btn-print { display: block; width: 100%; max-width: 200px; margin: 2rem auto; padding: 1rem; background: #1A1A1A; color: white; text-align: center; font-weight: bold; border-radius: 4px; cursor: pointer; text-decoration: none; border:none; }
+    
+    @media print {
+      body { background: white; padding: 0; }
+      .document { box-shadow: none; border: none; margin: 0; padding: 0; }
+      .btn-print { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="btn-print" onclick="window.print()">Print Bill of Lading</button>
+
+  <div class="document">
+    <div class="header">
+      <div class="logo">305<span>CARGO</span></div>
+      <h1>Straight Bill of Lading - Original</h1>
+      <p style="font-size:0.75rem; margin:0.25rem 0 0;">Not Negotiable</p>
+    </div>
+
+    <div class="tracking-text" id="b-tracking">TRK-XXXX</div>
+
+    <div class="grid-2">
+      <div class="cell" style="grid-column: span 2;">
+        <h3>Date of Issue</h3>
+        <p id="b-date"></p>
+      </div>
+      
+      <div class="cell">
+        <h3>Shipper (Sender)</h3>
+        <p id="b-sender" style="margin-bottom:0.25rem;"></p>
+        <p id="b-send-address" style="font-weight:400;"></p>
+      </div>
+      <div class="cell">
+        <h3>Consignee (Receiver)</h3>
+        <p id="b-receiver" style="margin-bottom:0.25rem;"></p>
+        <p id="b-rec-address" style="font-weight:400;"></p>
+        <p id="b-rec-contact" style="font-weight:400; margin-top:0.25rem;"></p>
+      </div>
+      
+      <div class="cell">
+        <h3>Port / Country of Origin</h3>
+        <p id="b-origin"></p>
+      </div>
+      <div class="cell">
+        <h3>Port / Country of Destination</h3>
+        <p id="b-destination"></p>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Qty</th>
+          <th>Description of Goods / Packaging</th>
+          <th>Dimensions</th>
+          <th>Gross Weight</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="b-qty"></td>
+          <td id="b-contents"></td>
+          <td id="b-dims"></td>
+          <td id="b-weight"></td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="grid-2" style="border-top:none;">
+      <div class="cell" style="border-top:none;">
+        <h3>Prepaid Shipping Charges</h3>
+        <p id="b-charge"></p>
+      </div>
+      <div class="cell" style="border-top:none;">
+        <h3>Carrier / Vessel Reference</h3>
+        <p id="b-vessel"></p>
+      </div>
+    </div>
+
+    <p style="font-size:0.75rem; color:#4A5568; margin-top:2rem; line-height:1.5;">
+      RECEIVED, subject to the classifications and tariffs in effect on the date of the issue of this Bill of Lading, the property described above in apparent good order. This is to certify that the above-named materials are properly classified, described, packaged, marked, and labeled.
+    </p>
+
+    <div class="signatures">
+      <div class="sig-line">Carrier Signature / Date</div>
+      <div class="sig-line">Shipper Signature / Date</div>
+    </div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    
+    if (id) {
+      const shipments = JSON.parse(localStorage.getItem('305cargo_shipments_v6')) || [];
+      const shipment = shipments.find(s => s.id === id);
+      if (shipment) {
+        document.getElementById('b-tracking').textContent = id.toUpperCase();
+        document.getElementById('b-date').textContent = new Date().toLocaleDateString();
+        
+        document.getElementById('b-sender').textContent = shipment.sender || 'N/A';
+        document.getElementById('b-send-address').textContent = shipment.sendAddress || 'N/A';
+        
+        document.getElementById('b-receiver').textContent = shipment.receiver || 'N/A';
+        document.getElementById('b-rec-address').textContent = shipment.recAddress || 'N/A';
+        document.getElementById('b-rec-contact').textContent = (shipment.recPhone || '') + " | " + (shipment.recEmail || '');
+        
+        document.getElementById('b-origin').textContent = shipment.waypoints?.[0]?.name || shipment.staticCurrLoc || 'N/A';
+        document.getElementById('b-destination').textContent = shipment.waypoints?.[shipment.waypoints.length-1]?.name || 'N/A';
+        
+        document.getElementById('b-contents').textContent = shipment.contents || 'N/A';
+        document.getElementById('b-qty').textContent = shipment.qty || '1';
+        document.getElementById('b-weight').textContent = (shipment.weight || 0) + ' kg';
+        document.getElementById('b-dims').textContent = shipment.dims || 'N/A';
+        
+        document.getElementById('b-vessel').textContent = shipment.vessel || 'N/A';
+        document.getElementById('b-charge').textContent = shipment.charge ? `${shipment.charge.toLocaleString()} ${shipment.currency}` : 'N/A';
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | 305CARGO</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  
+  <style>
+    .page-header {
+      padding-top: 150px;
+      padding-bottom: 80px;
+      background: linear-gradient(rgba(13, 27, 42, 0.8), rgba(13, 27, 42, 0.8)), url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1920&q=80') center/cover;
+      color: white;
+      text-align: center;
+    }
+
+    .about-section {
+      padding: var(--space-xl) 0;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+      align-items: center;
+    }
+
+    @media (max-width: 992px) {
+      .about-grid { grid-template-columns: 1fr; }
+    }
+
+    .value-card {
+      background: var(--light-gray);
+      padding: var(--space-md);
+      border-radius: var(--radius-md);
+      border-left: 4px solid var(--primary-color);
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary-color)"><path d="M5 12l5 5l10 -10"></path></svg>
+        305<span>CARGO</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="tracking.html" class="nav-link">Tracking</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        
+      </nav>
+      <button class="hamburger">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav-overlay">
+    <nav class="mobile-nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="tracking.html">Tracking</a>
+      <a href="contact.html">Contact</a>
+      
+    </nav>
+  </div>
+
+  <section class="page-header">
+    <div class="container">
+      <h1>Moving Global Trade Without Limits</h1>
+      <p style="font-size: 1.25rem; max-width: 700px; margin: 0 auto;">Discover the story, mission, and people behind 305CARGO's world-class logistics network.</p>
+    </div>
+  </section>
+
+  <section class="about-section container">
+    <div class="about-grid">
+      <div>
+        <h2 style="margin-bottom: 1rem;">Our Mission</h2>
+        <p>To provide reliable, fast, secure, and technology-driven logistics solutions connecting businesses worldwide. We believe in simplifying complex supply chains, allowing our clients to focus on what they do best: growing their business.</p>
+        
+        <h2 style="margin-bottom: 1rem; margin-top: 2rem;">Our Vision</h2>
+        <p>To become one of the world's most trusted logistics and supply chain companies, leveraging cutting-edge AI and a truly global infrastructure to deliver excellence at every mile.</p>
+      </div>
+      <div>
+        <img src="https://images.unsplash.com/photo-1580674285054-bed31e145f59?auto=format&fit=crop&w=800&q=80" alt="Warehouse Operations" style="border-radius: var(--radius-md); box-shadow: var(--shadow-lg);">
+      </div>
+    </div>
+  </section>
+
+  <section class="about-section section-light">
+    <div class="container">
+      <div class="text-center" style="margin-bottom: var(--space-lg);">
+        <h2>Why Choose 305CARGO?</h2>
+      </div>
+      <div class="grid grid-3">
+        <div class="value-card hover-lift">
+          <h3>24/7 Operations</h3>
+          <p>Global trade never sleeps, and neither do we. Our command centers operate around the clock to monitor your shipments.</p>
+        </div>
+        <div class="value-card hover-lift">
+          <h3>Global Reach</h3>
+          <p>With hubs in over 120 countries, we possess the local expertise and global network to move anything, anywhere.</p>
+        </div>
+        <div class="value-card hover-lift">
+          <h3>AI Route Optimization</h3>
+          <p>Our proprietary algorithms find the fastest, most cost-effective routing for your cargo, minimizing delays and emissions.</p>
+        </div>
+        <div class="value-card hover-lift">
+          <h3>Real-Time Tracking</h3>
+          <p>Complete transparency with military-grade tracking systems offering precise visibility down to the container level.</p>
+        </div>
+        <div class="value-card hover-lift">
+          <h3>Dedicated Support</h3>
+          <p>Every enterprise client is assigned a dedicated logistics coordinator, ensuring personalized and immediate service.</p>
+        </div>
+        <div class="value-card hover-lift">
+          <h3>Secure Transportation</h3>
+          <p>From TAPA-certified warehouses to secure convoys, we ensure your high-value cargo arrives completely untouched.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-col">
+          <h4 style="display:flex; align-items:center; gap:0.5rem; font-size: 1.5rem; font-weight:900;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" stroke-width="2"><path d="M5 12l5 5l10 -10"></path></svg>
+            305<span class="text-primary">CARGO</span>
+          </h4>
+          <p>Moving Global Trade Without Limits.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 305CARGO Global Logistics. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/animations.js"></script>
+</body>
+</html>

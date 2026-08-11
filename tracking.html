@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Shipment | 305CARGO</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Libre+Barcode+39+Text&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  
+  <style>
+    .page-header {
+      padding-top: 120px;
+      padding-bottom: var(--space-xl);
+      background-color: var(--secondary-color);
+      color: white;
+      text-align: center;
+    }
+
+    .tracking-container {
+      max-width: 900px;
+      margin: -60px auto var(--space-xl);
+      background: white;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-xl);
+      padding: var(--space-xl);
+      position: relative;
+      z-index: 10;
+    }
+
+    .tracking-form {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: var(--space-lg);
+    }
+
+    .tracking-form input {
+      flex: 1;
+      padding: 1.25rem;
+      font-size: 1.125rem;
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-sm);
+    }
+
+    .tracking-form button {
+      padding: 0 2rem;
+    }
+
+    /* Tracking Results */
+    #tracking-results {
+      display: none; 
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+    }
+    .status-badge.in-transit {
+      background-color: rgba(244, 180, 0, 0.2);
+      color: #b08200;
+    }
+    .status-badge.delivered {
+      background-color: rgba(0, 168, 107, 0.2);
+      color: var(--success-color);
+    }
+
+    .barcode-container {
+      margin-bottom: 1rem;
+      font-family: monospace;
+      color: #4A5568;
+      display: flex;
+      flex-direction: column;
+    }
+    .barcode-font {
+      font-family: 'Libre Barcode 39 Text', cursive;
+      font-size: 3rem;
+      line-height: 0.8;
+      color: var(--secondary-color);
+      margin-bottom: 0.25rem;
+    }
+
+    .shipment-details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.5rem;
+      background: var(--light-gray);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      margin-bottom: 2rem;
+      border: 1px solid var(--border-color);
+    }
+
+    @media (max-width: 900px) {
+      .shipment-details-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .shipment-details-grid { grid-template-columns: 1fr; }
+    }
+
+    .detail-item h5 {
+      color: #718096;
+      font-size: 0.75rem;
+      margin-bottom: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .detail-item p {
+      font-weight: 600;
+      color: var(--secondary-color);
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    .live-view-btn {
+      background: white;
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all var(--transition-fast);
+    }
+    .live-view-btn:hover {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    #map-wrapper {
+      margin-bottom: 2rem;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 10px;
+      bottom: 10px;
+      width: 2px;
+      background-color: var(--border-color);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+      opacity: 0.5; /* Dim inactive items */
+      transition: all var(--transition-normal);
+    }
+    .timeline-item.active,
+    .timeline-item.completed {
+      opacity: 1;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -2rem;
+      top: 5px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: white;
+      border: 3px solid var(--border-color);
+      z-index: 1;
+      transition: all var(--transition-normal);
+    }
+    
+    .timeline-item.completed .timeline-dot {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+    
+    .timeline-item.active .timeline-dot {
+      border-color: var(--primary-color);
+      background-color: white;
+      box-shadow: 0 0 0 4px rgba(200, 16, 46, 0.2);
+    }
+
+    .timeline-content {
+      background: var(--light-gray);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      position: relative;
+    }
+    
+    .timeline-content::before {
+      content: '';
+      position: absolute;
+      left: -8px;
+      top: 10px;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-right: 8px solid var(--light-gray);
+    }
+
+    .timeline-date {
+      font-size: 0.875rem;
+      color: #718096;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    
+    .timeline-title {
+      font-weight: 700;
+      color: var(--secondary-color);
+      margin-bottom: 0.25rem;
+    }
+    .timeline-location {
+      font-size: 0.875rem;
+      color: #4A5568;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary-color)"><path d="M5 12l5 5l10 -10"></path></svg>
+        305<span>CARGO</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="tracking.html" class="nav-link">Tracking</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <button class="hamburger">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav-overlay">
+    <nav class="mobile-nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="tracking.html">Tracking</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+
+  <section class="page-header">
+    <div class="container">
+      <h1>Track Your Shipment</h1>
+      <p style="font-size: 1.25rem; max-width: 600px; margin: 0 auto;">Real-time visibility across the entire supply chain.</p>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="tracking-container">
+      
+      <form id="trackingForm" class="tracking-form">
+        <input type="text" id="trackingNumber" placeholder="Enter Tracking Number (e.g. 305-DEMO)" required>
+        <button type="submit" class="btn btn-primary">Track</button>
+      </form>
+
+      <!-- Loading State -->
+      <div id="tracking-loading" style="display:none; text-align:center; padding: 2rem 0;">
+        <div class="loader-spinner" style="border-top-color: var(--primary-color); margin: 0 auto; width: 40px; height: 40px;"></div>
+        <p style="margin-top: 1rem;">Locating shipment...</p>
+      </div>
+
+      <!-- Results Area -->
+      <div id="tracking-results">
+        
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; margin-bottom: 2rem; border-bottom: 2px solid var(--border-color); padding-bottom: 1.5rem;">
+          <div>
+            <div class="barcode-container">
+              <span class="barcode-font" id="barcode-display">*305DEMO*</span>
+              <span style="font-size: 0.875rem;" id="serial-display">S/N: 0000-000-0000</span>
+            </div>
+            <h2 style="margin-bottom: 0.5rem; font-size: 2rem;">TRK: <span id="display-id" class="text-primary"></span></h2>
+          </div>
+          <div style="text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem;">
+            <div id="status-badge" class="status-badge in-transit">IN TRANSIT</div>
+            <div style="display:flex; gap:0.5rem; margin-top:0.5rem;">
+              <button id="btn-pdf-manifest" class="btn btn-secondary" style="font-size:0.75rem; padding:0.5rem 1rem; border-color:var(--primary-color); color:var(--primary-color);">📄 Manifest</button>
+              <button id="btn-pdf-bol" class="btn btn-primary" style="font-size:0.75rem; padding:0.5rem 1rem;">📄 BOL</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="shipment-details-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+          <div class="detail-item">
+            <h5>Origin</h5>
+            <p id="origin-text">-</p>
+          </div>
+          <div class="detail-item">
+            <h5>Destination</h5>
+            <p id="dest-text">-</p>
+          </div>
+          <div class="detail-item">
+            <h5>Current Location</h5>
+            <p id="curr-loc-text" style="color:var(--primary-color);">-</p>
+          </div>
+          <div class="detail-item">
+            <h5>Sender Name</h5>
+            <p id="sender-text">-</p>
+          </div>
+          <div class="detail-item">
+            <h5>Sender Address</h5>
+            <p id="send-address-text">-</p>
+          </div>
+          <div class="detail-item">
+            <h5>Receiver Name</h5>
+            <p id="receiver-text">-</p>
+          </div>
+          <div class="detail-item">
+            <h5>Receiver Phone</h5>
+            <p id="rec-phone-text">-</p>
+          </div>
+          <div class="detail-item">
+            <h5>Receiver Email</h5>
+            <p id="rec-email-text">-</p>
+          </div>
+          <div class="detail-item">
+            <h5>Receiver Address</h5>
+            <p id="rec-address-text">-</p>
+          </div>
+          <div class="detail-item">
+            <h5>Total Weight</h5>
+            <p id="weight-text">-</p>
+          </div>
+          <div class="detail-item">
+            <h5>Quantity</h5>
+            <p id="qty-text">-</p>
+          </div>
+          <div class="detail-item">
+            <h5>Dimensions</h5>
+            <p id="dims-text">-</p>
+          </div>
+          <div class="detail-item">
+            <h5>Contents</h5>
+            <p id="contents-text" style="font-size:0.875rem;">-</p>
+          </div>
+          <div class="detail-item">
+            <h5>Shipping Charge</h5>
+            <p id="charge-text" style="color:var(--primary-color); font-weight:700;">-</p>
+          </div>
+          <div class="detail-item">
+            <h5>Service Level</h5>
+            <p id="service-text">-</p>
+          </div>
+          <div class="detail-item">
+            <h5>Flight/Vessel No.</h5>
+            <p id="vessel-text">-</p>
+          </div>
+        </div>
+
+        <div id="map-wrapper">
+          <h4 style="margin-bottom: 1rem; color: var(--secondary-color);">Live Satellite Tracking</h4>
+          <div id="tracking-map" style="height: 350px; width: 100%; border-radius: var(--radius-md); border: 1px solid var(--border-color); z-index: 1;"></div>
+        </div>
+
+        <div class="timeline" id="tracking-timeline">
+          <!-- Timeline items injected via JS -->
+        </div>
+        
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-col">
+          <h4 style="display:flex; align-items:center; gap:0.5rem; font-size: 1.5rem; font-weight:900;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" stroke-width="2"><path d="M5 12l5 5l10 -10"></path></svg>
+            305<span class="text-primary">CARGO</span>
+          </h4>
+          <p>Moving Global Trade Without Limits. We provide reliable, fast, secure, and technology-driven logistics solutions.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 305CARGO Global Logistics. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="assets/js/tracking.js"></script>
+</body>
+</html>

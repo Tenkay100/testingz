@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Careers | 305CARGO</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  
+  <style>
+    .page-header {
+      padding-top: 150px;
+      padding-bottom: 80px;
+      background: linear-gradient(rgba(13, 27, 42, 0.8), rgba(13, 27, 42, 0.8)), url('https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=1920&q=80') center/cover;
+      color: white;
+      text-align: center;
+    }
+
+    .job-card {
+      background: white;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      transition: all var(--transition-normal);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    
+    .job-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+      border-color: var(--primary-color);
+    }
+
+    .job-info h3 { margin-bottom: 0.25rem; font-size: 1.25rem; }
+    .job-meta { color: #718096; font-size: 0.875rem; display: flex; gap: 1rem; }
+    .job-meta span { display: flex; align-items: center; gap: 0.25rem; }
+
+    @media (max-width: 768px) {
+      .job-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary-color)"><path d="M5 12l5 5l10 -10"></path></svg>
+        305<span>CARGO</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="tracking.html" class="nav-link">Tracking</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        
+      </nav>
+      <button class="hamburger">&#9776;</button>
+    </div>
+  </header>
+
+  <section class="page-header">
+    <div class="container">
+      <h1>Join Our Global Team</h1>
+      <p style="font-size: 1.25rem; max-width: 700px; margin: 0 auto;">Help us build the future of global supply chains. Explore career opportunities at 305CARGO.</p>
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="text-center" style="margin-bottom: var(--space-lg);">
+      <h2>Open Positions</h2>
+    </div>
+
+    <div class="job-card">
+      <div class="job-info">
+        <h3>Operations Manager</h3>
+        <div class="job-meta">
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Miami, FL (HQ)</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> Full-Time</span>
+        </div>
+      </div>
+      <a href="contact.html" class="btn btn-primary">Apply Now</a>
+    </div>
+
+    <div class="job-card">
+      <div class="job-info">
+        <h3>Logistics Coordinator (Air Freight)</h3>
+        <div class="job-meta">
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Dubai, UAE</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> Full-Time</span>
+        </div>
+      </div>
+      <a href="contact.html" class="btn btn-primary">Apply Now</a>
+    </div>
+
+    <div class="job-card">
+      <div class="job-info">
+        <h3>Enterprise Sales Executive</h3>
+        <div class="job-meta">
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> London, UK</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> Remote Available</span>
+        </div>
+      </div>
+      <a href="contact.html" class="btn btn-primary">Apply Now</a>
+    </div>
+
+    <div class="job-card">
+      <div class="job-info">
+        <h3>Warehouse Supervisor</h3>
+        <div class="job-meta">
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Shanghai, CN</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> Shift Work</span>
+        </div>
+      </div>
+      <a href="contact.html" class="btn btn-primary">Apply Now</a>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-col">
+          <h4 style="display:flex; align-items:center; gap:0.5rem; font-size: 1.5rem; font-weight:900;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" stroke-width="2"><path d="M5 12l5 5l10 -10"></path></svg>
+            305<span class="text-primary">CARGO</span>
+          </h4>
+          <p>Moving Global Trade Without Limits.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 305CARGO Global Logistics. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/animations.js"></script>
+</body>
+</html>

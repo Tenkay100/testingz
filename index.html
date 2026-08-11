@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>305CARGO | Global Logistics Solutions</title>
+  <meta name="description" content="305CARGO provides reliable, fast, secure, and technology-driven logistics solutions connecting businesses worldwide.">
+  
+  <!-- SEO & Open Graph -->
+  <meta property="og:title" content="305CARGO | Global Logistics Solutions">
+  <meta property="og:description" content="Air Freight, Ocean Freight, Road Transport, and End-to-End Supply Chain Management.">
+  <meta property="og:type" content="website">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  
+  <!-- Custom specific styles for index page -->
+  <style>
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 700px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: white;
+    }
+    
+    .hero-video-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+    
+    .hero-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(to bottom, rgba(13, 27, 42, 0.8) 0%, rgba(13, 27, 42, 0.4) 100%);
+      z-index: -1;
+    }
+    
+    .hero-content {
+      text-align: center;
+      max-width: 900px;
+      z-index: 1;
+      padding: 0 var(--space-md);
+    }
+    
+    .hero h1 { color: white; margin-bottom: 1.5rem; }
+    .hero p { color: rgba(255,255,255,0.9); font-size: 1.25rem; margin-bottom: 2.5rem; }
+    
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Stats Banner */
+    .stats-banner {
+      background-color: var(--primary-color);
+      color: white;
+      padding: var(--space-md) 0;
+      position: relative;
+      z-index: 10;
+      margin-top: -50px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-xl);
+    }
+    
+    .stat-item { text-align: center; padding: 1rem; }
+    .stat-number { font-size: 2.5rem; font-weight: 900; margin-bottom: 0.5rem; display: block;}
+    .stat-label { font-size: 0.875rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 500;}
+
+    /* Services */
+    .service-card {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: var(--space-lg) var(--space-md);
+      text-align: center;
+      border: 1px solid var(--border-color);
+      transition: all var(--transition-normal);
+      cursor: pointer;
+    }
+    
+    .service-icon {
+      width: 80px; height: 80px;
+      background: var(--light-gray);
+      border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      margin-bottom: 1.5rem;
+      color: var(--primary-color);
+      transition: all var(--transition-normal);
+    }
+    .service-icon svg { width: 40px; height: 40px; fill: currentColor; }
+    
+    .service-card:hover .service-icon {
+      background: var(--primary-color);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    /* Live Tracking Preview */
+    .tracking-section {
+      position: relative;
+      background: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+    }
+    .tracking-section::before {
+      content: '';
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(13, 27, 42, 0.9);
+    }
+    .tracking-box {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      box-shadow: var(--shadow-xl);
+    }
+    .tracking-input-group {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .tracking-input-group input {
+      flex: 1;
+      padding: 1rem 1.5rem;
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      font-size: 1.125rem;
+    }
+    .tracking-input-group input:focus { border-color: var(--primary-color); outline: none; }
+
+    /* Global Network */
+    .network-map {
+      width: 100%;
+      height: 500px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg') center/contain no-repeat;
+      position: relative;
+      opacity: 0.7;
+    }
+    .map-marker {
+      position: absolute;
+      width: 15px; height: 15px;
+      background: var(--primary-color);
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 0 0 rgba(200, 16, 46, 0.7);
+      animation: pulseGlow 2s infinite;
+    }
+    
+    /* Just placing a few markers for visual effect */
+    .marker-ny { top: 35%; left: 25%; }
+    .marker-ldn { top: 30%; left: 48%; }
+    .marker-dxb { top: 45%; left: 60%; }
+    .marker-tyo { top: 38%; left: 85%; }
+    .marker-syd { top: 75%; left: 88%; }
+
+  </style>
+</head>
+<body>
+
+  <!-- Page Loader -->
+  <div class="loader">
+    <div class="loader-spinner"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary-color)"><path d="M5 12l5 5l10 -10"></path></svg>
+        305<span>CARGO</span>
+      </a>
+      
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="tracking.html" class="nav-link">Tracking</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        
+      </nav>
+      
+      <button class="hamburger">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav-overlay">
+    <nav class="mobile-nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="tracking.html">Tracking</a>
+      <a href="contact.html">Contact</a>
+      
+    </nav>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <!-- Using an Unsplash placeholder image instead of a video to ensure it works reliably without asset dependencies, acting as a poster -->
+    <img src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=1920&q=80" alt="Global Logistics" class="hero-video-bg">
+    <div class="hero-overlay"></div>
+    
+    <div class="container hero-content">
+      <h1>Global Logistics Solutions Built for Modern Business</h1>
+      <p>Air Freight, Ocean Freight, Road Transport, Customs Clearance and End-to-End Supply Chain Management.</p>
+      <div class="hero-btns">
+        
+        <a href="tracking.html" class="btn btn-secondary hover-lift">Track Shipment</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics Banner -->
+  <div class="container">
+    <div class="stats-banner grid grid-4">
+      <div class="stat-item">
+        <span class="stat-number counter-value" data-target="120">0</span>
+        <span class="stat-label">Countries Served</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number counter-value" data-target="500">0</span>
+        <span class="stat-label">Thousand Shipments</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number counter-value" data-target="25">0</span>
+        <span class="stat-label">Thousand Clients</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number counter-value" data-target="99">0</span>
+        <span class="stat-label">On-Time %</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Services Section -->
+  <section class="section">
+    <div class="container">
+      <div class="text-center" style="max-width: 700px; margin: 0 auto var(--space-lg);">
+        <h2>Comprehensive Logistics Solutions</h2>
+        <p>From the first mile to the last, we provide secure, fast, and technology-driven transportation services tailored to your industry.</p>
+      </div>
+      
+      <div class="grid grid-3">
+        <!-- Air Freight -->
+        <div class="service-card hover-lift">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16c0-3.3-2.7-6-6-6h-10l-4-4v2l4 4h10c2.2 0 4 1.8 4 4v4h2v-4z"></path></svg>
+          </div>
+          <h3>Air Freight</h3>
+          <p>Expedited global air transport for time-critical shipments with guaranteed space allocation.</p>
+          <a href="services.html" class="text-primary" style="font-weight: 600; margin-top: 1rem; display: inline-block;">Learn More &rarr;</a>
+        </div>
+        
+        <!-- Ocean Freight -->
+        <div class="service-card hover-lift">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><path d="M2 20h20M4 16c2-2 6-2 8 0s6 2 8 0M4 12c2-2 6-2 8 0s6 2 8 0"></path></svg>
+          </div>
+          <h3>Ocean Freight</h3>
+          <p>Cost-effective FCL and LCL shipping solutions connecting major global ports reliably.</p>
+          <a href="services.html" class="text-primary" style="font-weight: 600; margin-top: 1rem; display: inline-block;">Learn More &rarr;</a>
+        </div>
+        
+        <!-- Road Freight -->
+        <div class="service-card hover-lift">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="12" width="14" height="8" rx="1"></rect><path d="M17 12h3a2 2 0 0 1 2 2v4a1 1 0 0 1-1 1h-4"></path><circle cx="7" cy="20" r="2"></circle><circle cx="17" cy="20" r="2"></circle><path d="M3 12V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v6"></path></svg>
+          </div>
+          <h3>Road Transport</h3>
+          <p>Extensive domestic and cross-border trucking networks ensuring secure door-to-door delivery.</p>
+          <a href="services.html" class="text-primary" style="font-weight: 600; margin-top: 1rem; display: inline-block;">Learn More &rarr;</a>
+        </div>
+      </div>
+      
+      <div class="text-center" style="margin-top: var(--space-lg);">
+        <a href="services.html" class="btn btn-secondary" style="color:var(--secondary-color); border-color:var(--secondary-color);">View All Services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Tracking Preview Section -->
+  <section class="section tracking-section">
+    <div class="container">
+      <div class="tracking-box">
+        <h2 class="text-center">Track Your Shipment</h2>
+        <p class="text-center">Enter your tracking number or reference ID to get real-time status updates.</p>
+        
+        <form action="tracking.html" method="GET" class="tracking-input-group">
+          <input type="text" name="id" placeholder="e.g., 305123456" required>
+          <button type="submit" class="btn btn-primary">Track Now</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Global Network -->
+  <section class="section section-light">
+    <div class="container">
+      <div class="text-center" style="margin-bottom: var(--space-lg);">
+        <h2>Global Network</h2>
+        <p>Connecting continents with seamless logistics infrastructure.</p>
+      </div>
+      
+      <div class="network-map">
+        <div class="map-marker marker-ny" title="New York Hub"></div>
+        <div class="map-marker marker-ldn" title="London Hub"></div>
+        <div class="map-marker marker-dxb" title="Dubai Hub"></div>
+        <div class="map-marker marker-tyo" title="Tokyo Hub"></div>
+        <div class="map-marker marker-syd" title="Sydney Hub"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section" style="background-color: var(--primary-color); color: white;">
+    <div class="container text-center">
+      <h2 style="color: white; margin-bottom: 1rem;">Ready to optimize your supply chain?</h2>
+      <p style="color: rgba(255,255,255,0.9); font-size: 1.25rem; margin-bottom: 2rem;">Get a custom quote tailored to your business needs today.</p>
+      
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-col">
+          <h4 style="display:flex; align-items:center; gap:0.5rem; font-size: 1.5rem; font-weight:900;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" stroke-width="2"><path d="M5 12l5 5l10 -10"></path></svg>
+            305<span class="text-primary">CARGO</span>
+          </h4>
+          <p>Moving Global Trade Without Limits. We provide reliable, fast, secure, and technology-driven logistics solutions.</p>
+        </div>
+        
+        <div class="footer-col">
+          <h4>Services</h4>
+          <div class="footer-links">
+            <a href="services.html">Air Freight</a>
+            <a href="services.html">Ocean Freight</a>
+            <a href="services.html">Road Transport</a>
+            <a href="services.html">Warehousing</a>
+          </div>
+        </div>
+        
+        <div class="footer-col">
+          <h4>Company</h4>
+          <div class="footer-links">
+            <a href="about.html">About Us</a>
+            <a href="careers.html">Careers</a>
+            <a href="news.html">News & Media</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </div>
+        
+        <div class="footer-col">
+          <h4>Newsletter</h4>
+          <p>Subscribe for industry insights.</p>
+          <form style="display:flex; margin-top: 1rem;">
+            <input type="email" placeholder="Your Email" style="padding: 0.5rem; width:100%; border:none; outline:none; border-radius: var(--radius-sm) 0 0 var(--radius-sm);">
+            <button type="button" class="btn btn-primary" style="padding: 0.5rem 1rem; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">Go</button>
+          </form>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 305CARGO Global Logistics. All rights reserved.</p>
+        <div class="social-links">
+          <a href="#">in</a>
+          <a href="#">tw</a>
+          <a href="#">fb</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/animations.js"></script>
+</body>
+</html>

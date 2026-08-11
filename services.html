@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services | 305CARGO</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  
+  <style>
+    .page-header {
+      padding-top: 150px;
+      padding-bottom: 80px;
+      background: linear-gradient(rgba(13, 27, 42, 0.8), rgba(13, 27, 42, 0.8)), url('https://images.unsplash.com/photo-1542296332-2e4473faf563?auto=format&fit=crop&w=1920&q=80') center/cover;
+      color: white;
+      text-align: center;
+    }
+
+    .service-detailed-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: var(--space-xl);
+    }
+    
+    .service-detailed-card:nth-child(even) {
+      direction: rtl;
+    }
+    
+    .service-detailed-card:nth-child(even) > * {
+      direction: ltr;
+    }
+
+    @media (max-width: 992px) {
+      .service-detailed-card { grid-template-columns: 1fr; direction: ltr !important; }
+    }
+
+    .service-img {
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+    
+    .service-content h2 { margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;}
+    .service-content ul { margin-top: 1rem; margin-bottom: 1.5rem; }
+    .service-content li { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; color: #4A5568;}
+    .service-content li::before {
+      content: '✓';
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary-color)"><path d="M5 12l5 5l10 -10"></path></svg>
+        305<span>CARGO</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="tracking.html" class="nav-link">Tracking</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        
+      </nav>
+      <button class="hamburger">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav-overlay">
+    <nav class="mobile-nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="tracking.html">Tracking</a>
+      <a href="contact.html">Contact</a>
+      
+    </nav>
+  </div>
+
+  <section class="page-header">
+    <div class="container">
+      <h1>Our Logistics Services</h1>
+      <p style="font-size: 1.25rem; max-width: 700px; margin: 0 auto;">End-to-end supply chain solutions engineered for speed, safety, and scale.</p>
+    </div>
+  </section>
+
+  <section class="section container">
+    
+    <!-- Air Freight -->
+    <div class="service-detailed-card">
+      <div>
+        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80" alt="Air Freight" class="service-img">
+      </div>
+      <div class="service-content">
+        <h2>
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="var(--primary-color)"><path d="M22 16c0-3.3-2.7-6-6-6h-10l-4-4v2l4 4h10c2.2 0 4 1.8 4 4v4h2v-4z"></path></svg>
+          Air Freight
+        </h2>
+        <p>When time is critical, our air freight solutions deliver. We partner with the world's leading airlines to guarantee space allocation and expedited transit times globally.</p>
+        <ul>
+          <li>Next-Flight-Out (NFO) capabilities</li>
+          <li>Charter operations for oversized cargo</li>
+          <li>Temperature-controlled transport</li>
+          <li>Door-to-door delivery worldwide</li>
+        </ul>
+        
+      </div>
+    </div>
+
+    <!-- Ocean Freight -->
+    <div class="service-detailed-card">
+      <div>
+        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="Ocean Freight" class="service-img">
+      </div>
+      <div class="service-content">
+        <h2>
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="var(--primary-color)"><path d="M2 20h20M4 16c2-2 6-2 8 0s6 2 8 0M4 12c2-2 6-2 8 0s6 2 8 0"></path></svg>
+          Ocean Freight
+        </h2>
+        <p>Cost-effective and reliable shipping for large volumes. We manage millions of TEUs annually, securing competitive rates and prime vessel space for our clients.</p>
+        <ul>
+          <li>Full Container Load (FCL)</li>
+          <li>Less than Container Load (LCL)</li>
+          <li>Roll-on/Roll-off (RoRo) services</li>
+          <li>Port-to-port and Door-to-door</li>
+        </ul>
+        
+      </div>
+    </div>
+
+    <!-- Warehousing -->
+    <div class="service-detailed-card">
+      <div>
+        <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=800&q=80" alt="Warehousing" class="service-img">
+      </div>
+      <div class="service-content">
+        <h2>
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+          Warehousing & Distribution
+        </h2>
+        <p>State-of-the-art facilities equipped with advanced WMS (Warehouse Management Systems) to store, pick, pack, and distribute your goods efficiently.</p>
+        <ul>
+          <li>Bonded and non-bonded facilities</li>
+          <li>Cross-docking and transloading</li>
+          <li>E-commerce fulfillment</li>
+          <li>Inventory management</li>
+        </ul>
+        <a href="contact.html" class="btn btn-secondary" style="color:var(--secondary-color); border-color:var(--secondary-color);">Contact Our Team</a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-col">
+          <h4 style="display:flex; align-items:center; gap:0.5rem; font-size: 1.5rem; font-weight:900;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" stroke-width="2"><path d="M5 12l5 5l10 -10"></path></svg>
+            305<span class="text-primary">CARGO</span>
+          </h4>
+          <p>Moving Global Trade Without Limits.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 305CARGO Global Logistics. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/animations.js"></script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shipping Manifest - 305CARGO</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; background: #f0f2f5; margin: 0; padding: 2rem; color: #111; }
+    .document { background: white; max-width: 800px; margin: 0 auto; padding: 3rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-top: 8px solid #FF6B00; }
+    .header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #E2E8F0; padding-bottom: 1rem; margin-bottom: 2rem; }
+    .logo { font-size: 2rem; font-weight: 900; color: #1A1A1A; }
+    .logo span { color: #FF6B00; }
+    .doc-title { text-align: right; }
+    .doc-title h1 { margin: 0; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 2px; color: #1A1A1A; }
+    .doc-title p { margin: 0.25rem 0 0; color: #718096; font-family: monospace; font-size: 1.1rem; }
+    
+    .company-info { margin-bottom: 2rem; font-size: 0.875rem; color: #4A5568; line-height: 1.5; }
+    
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+    .box { border: 1px solid #E2E8F0; padding: 1rem; border-radius: 4px; }
+    .box h3 { margin: 0 0 1rem 0; font-size: 1rem; color: #1A1A1A; border-bottom: 1px solid #E2E8F0; padding-bottom: 0.5rem; text-transform: uppercase; }
+    .box p { margin: 0.5rem 0; font-size: 0.875rem; }
+    .box strong { display: inline-block; width: 80px; }
+
+    table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; }
+    th, td { border: 1px solid #E2E8F0; padding: 0.75rem; text-align: left; font-size: 0.875rem; }
+    th { background: #F7FAFC; color: #4A5568; font-weight: 600; }
+    
+    .footer { text-align: center; margin-top: 3rem; font-size: 0.75rem; color: #A0AEC0; }
+    
+    .btn-print { display: block; width: 100%; max-width: 200px; margin: 2rem auto; padding: 1rem; background: #FF6B00; color: white; text-align: center; font-weight: bold; border-radius: 4px; cursor: pointer; text-decoration: none; border:none; }
+    
+    @media print {
+      body { background: white; padding: 0; }
+      .document { box-shadow: none; border-top: none; margin: 0; padding: 0; }
+      .btn-print { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="btn-print" onclick="window.print()">Print / Save as PDF</button>
+
+  <div class="document">
+    <div class="header">
+      <div class="logo">305<span>CARGO</span></div>
+      <div class="doc-title">
+        <h1>Shipping Manifest</h1>
+        <p id="doc-tracking">TRK-XXXX</p>
+        <p id="doc-date" style="font-size:0.75rem;">Date: --</p>
+      </div>
+    </div>
+
+    <div class="company-info">
+      <strong>305CARGO Global Logistics</strong><br>
+      123 Ocean Blvd, Miami FL, USA<br>
+      support@305cargo.com | +1 (305) 555-0199
+    </div>
+
+    <div class="grid-2">
+      <div class="box">
+        <h3>Shipper / Sender</h3>
+        <p><strong>Name:</strong> <span id="m-sender"></span></p>
+        <p><strong>Address:</strong> <span id="m-send-address"></span></p>
+      </div>
+      <div class="box">
+        <h3>Consignee / Receiver</h3>
+        <p><strong>Name:</strong> <span id="m-receiver"></span></p>
+        <p><strong>Address:</strong> <span id="m-rec-address"></span></p>
+        <p><strong>Phone:</strong> <span id="m-rec-phone"></span></p>
+        <p><strong>Email:</strong> <span id="m-rec-email"></span></p>
+      </div>
+    </div>
+
+    <div class="box" style="margin-bottom: 2rem;">
+      <h3>Routing Information</h3>
+      <p><strong>Origin:</strong> <span id="m-origin"></span></p>
+      <p><strong>Destination:</strong> <span id="m-destination"></span></p>
+      <p><strong>Service:</strong> <span id="m-service"></span></p>
+    </div>
+
+    <h3>Cargo Details</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Description of Goods</th>
+          <th>Qty</th>
+          <th>Weight (kg)</th>
+          <th>Dimensions</th>
+          <th>Vessel/Flight No.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="m-contents"></td>
+          <td id="m-qty"></td>
+          <td id="m-weight"></td>
+          <td id="m-dims"></td>
+          <td id="m-vessel"></td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div style="text-align: right; margin-bottom: 2rem;">
+      <h3 style="margin:0; font-size:1rem; color:#4A5568;">Total Shipping Charge:</h3>
+      <h2 style="margin:0.25rem 0 0; color:#1A1A1A; font-size:1.5rem;" id="m-charge"></h2>
+    </div>
+
+    <div class="box">
+      <h3>Current Status</h3>
+      <p style="font-size:1.25rem; font-weight:bold; color:var(--primary-color);" id="m-status"></p>
+    </div>
+
+    <div class="footer">
+      Generated automatically by 305CARGO Logistics System on <span id="footer-date"></span>.<br>
+      This document serves as an official shipping manifest for customs and transit verification.
+    </div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    
+    if (id) {
+      const shipments = JSON.parse(localStorage.getItem('305cargo_shipments_v6')) || [];
+      const shipment = shipments.find(s => s.id === id);
+      if (shipment) {
+        document.getElementById('doc-tracking').textContent = id;
+        document.getElementById('doc-date').textContent = "Date: " + new Date().toLocaleDateString();
+        document.getElementById('footer-date').textContent = new Date().toLocaleString();
+        
+        document.getElementById('m-sender').textContent = shipment.sender || 'N/A';
+        document.getElementById('m-send-address').textContent = shipment.sendAddress || 'N/A';
+        
+        document.getElementById('m-receiver').textContent = shipment.receiver || 'N/A';
+        document.getElementById('m-rec-address').textContent = shipment.recAddress || 'N/A';
+        document.getElementById('m-rec-phone').textContent = shipment.recPhone || 'N/A';
+        document.getElementById('m-rec-email').textContent = shipment.recEmail || 'N/A';
+        
+        document.getElementById('m-origin').textContent = shipment.waypoints?.[0]?.name || shipment.staticCurrLoc || 'N/A';
+        document.getElementById('m-destination').textContent = shipment.waypoints?.[shipment.waypoints.length-1]?.name || 'N/A';
+        document.getElementById('m-service').textContent = shipment.serviceType || 'Standard';
+        
+        document.getElementById('m-contents').textContent = shipment.contents || 'N/A';
+        document.getElementById('m-qty').textContent = shipment.qty || '1';
+        document.getElementById('m-weight').textContent = shipment.weight || 'N/A';
+        document.getElementById('m-dims').textContent = shipment.dims || 'N/A';
+        document.getElementById('m-vessel').textContent = shipment.vessel || 'N/A';
+        
+        document.getElementById('m-charge').textContent = shipment.charge ? `${shipment.charge.toLocaleString()} ${shipment.currency}` : 'N/A';
+        
+        document.getElementById('m-status').textContent = shipment.manualStatusOverride || (shipment.autoState === 'playing' ? 'IN TRANSIT' : 'PAUSED');
+      }
+    }
+  </script>
+</body>
+</html>
